@@ -140,33 +140,6 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    public void checkLogin(User user) {
-        Call<Boolean> call = ApiClient.getInstance().getMyApi().login(user);
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Boolean object = response.body();
-                Log.d("Response", "onResponse: " + object);
-                if (true){
-                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công!!", Toast.LENGTH_SHORT).show();
-                    Intent intent = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        intent = new Intent(LoginActivity.this, MainActivity.class);
-                    }
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getApplicationContext(), "Thông tin đăng nhập sai, mời đăng nhập lại", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Có lỗi xảy ra.", Toast.LENGTH_SHORT).show();
-                Log.e("error", t.getMessage());
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {

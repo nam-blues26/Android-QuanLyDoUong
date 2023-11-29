@@ -5,16 +5,16 @@ public class Product {
     private String tenDoUong;
     private int gia;
     private boolean trangThai;
-    private String image;
+    private int maLoai;
 
     public Product() {
     }
 
-    public Product(int maDoUong, String tenDoUong, int gia, String image) {
+    public Product(int maDoUong, String tenDoUong, int gia, int maLoai) {
         this.maDoUong = maDoUong;
         this.tenDoUong = tenDoUong;
         this.gia = gia;
-        this.image = image;
+        this.maLoai = maLoai;
     }
 
     public int getMaDoUong() {
@@ -49,12 +49,23 @@ public class Product {
         this.trangThai = trangThai;
     }
 
-    public String getImage() {
-        return image;
+    public int getMaLoai() {
+        return maLoai;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setMaLoai(int maLoai) {
+        this.maLoai = maLoai;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "maDoUong=" + maDoUong +
+                ", tenDoUong='" + tenDoUong + '\'' +
+                ", gia=" + gia +
+                ", trangThai=" + trangThai +
+                ", maLoai=" + maLoai +
+                '}';
     }
 }
 

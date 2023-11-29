@@ -49,6 +49,7 @@
     <string name="add_product_title">Thêm sản phẩm mới</string>
     <string name="product_label">Sản phẩm:</string>
     <string name="single_price">Đơn giá:</string>
+    <string name="category_label">Loại:</string>
     <string name="name_add_button">THÊM</string>
     <string name="name_cancle_button">HỦY</string>
     <string name="name_update_button">SỬA</string>
