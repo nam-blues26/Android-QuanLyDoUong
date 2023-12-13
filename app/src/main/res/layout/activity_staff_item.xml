@@ -13,18 +13,25 @@
         android:padding="16dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="73dp"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edProductName"
+            <TextView
+                android:id="@+id/tvFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name"
+                android:text="Full Name"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone number"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -33,11 +40,11 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/edProductPrice"
+            <TextView
+                android:id="@+id/tvGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price: $0.00"
+                android:text="Giới tính: "
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -48,23 +55,23 @@
             android:gravity="end">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonEdit"
+                android:id="@+id/buttonEditStaff"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="@drawable/button_border_success"
                 android:textColor="@color/white"
                 android:text="Sửa"
-                android:textSize="10sp" />
+                android:textSize="10dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonDelete"
+                android:id="@+id/buttonDeleteStaff"
                 android:layout_width="64dp"
                 android:layout_height="33dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/button_border_danger"
-                android:textColor="@color/white"
                 android:text="Xóa"
-                android:textSize="10sp" />
+                android:textColor="@color/white"
+                android:textSize="10dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

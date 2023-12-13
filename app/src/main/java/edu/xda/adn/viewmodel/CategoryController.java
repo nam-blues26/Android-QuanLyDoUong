@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import edu.xda.adn.model.Category;
+import edu.xda.adn.model.Product;
 import edu.xda.adn.service.ApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +30,21 @@ public class CategoryController {
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 callback.onFailure("Có lỗi xảy ra");
+                Log.e("error", t.getMessage());
+            }
+        });
+    }
+
+    public void addCategory(Category category){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().addCategory(category);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.e("error", t.getMessage());
             }
         });

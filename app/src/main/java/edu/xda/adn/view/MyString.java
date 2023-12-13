@@ -44,6 +44,7 @@ public interface MyString {
 
     //Sửa đường dẫn api ở đây nhé
     String LOCALHOST = "http://192.168.1.13/DoUongAPI/";
+//    String LOCALHOST = "http://172.20.10.2/DoUongAPI/";
 
     String URL_DELETE_PRODUCT = LOCALHOST + "/delete_product.php";
 

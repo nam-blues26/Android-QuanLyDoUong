@@ -69,9 +69,8 @@ public class ProductFragment extends Fragment   {
 
     private static Toolbar toolbar;
 
-    private static ArrayList<Product> selectionList = new ArrayList<>();
 
-    private static ImageView imDeleteProduct;
+    private static ImageView imAddCategory;
 
     private Spinner spinnerCategory;
     private CategoryAdapter categoryAdapter;
@@ -91,8 +90,7 @@ public class ProductFragment extends Fragment   {
     }
 
     private void init(View view) {
-        imDeleteProduct = view.findViewById(R.id.imDeleteProduct);
-        imDeleteProduct.setVisibility(View.INVISIBLE);
+        imAddCategory = view.findViewById(R.id.imAddCategory);
         edSearchProduct = view.findViewById(R.id.edSearchProduct);
         btnAddProduct = view.findViewById(R.id.btnAddProduct);
         toolbar = getActivity().findViewById(R.id.toolbar);
@@ -115,8 +113,12 @@ public class ProductFragment extends Fragment   {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                filter(editable.toString());
+
             }
+        });
+
+        imAddCategory.setOnClickListener(e->{
+            openDialogAddCategory();
         });
 
         btnAddProduct.setOnClickListener(e -> {
@@ -189,7 +191,7 @@ public class ProductFragment extends Fragment   {
                     Toast.makeText(getActivity(), R.string.validate_price, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String nameProduct = edNameProduct.getText().toString().trim();
+                String nameProduct = edNameProduct.getText().toString();
                 Integer priceProduct = Integer.valueOf(edPriceProduct.getText().toString().trim());
 
                 product.setTenDoUong(nameProduct);
@@ -221,21 +223,36 @@ public class ProductFragment extends Fragment   {
         }
     }
 
+    private void openDialogAddCategory() {
+        try {
+            final Dialog dialog = new Dialog(getContext());
+            dialog.setContentView(R.layout.dialog_add_category);
+            final EditText edCategory = dialog.findViewById(R.id.edAddCategory);
 
+            Button btnAddNewProduct = dialog.findViewById(R.id.btnAddNewCategory);
+            btnAddNewProduct.setOnClickListener(e -> {
+                Category category = new Category();
+                category.setTenLoai(edCategory.getText().toString());
+                addProductFromDatabase(category);
+                dialog.dismiss();
+            });
+            Button btnCancelDialog = dialog.findViewById(R.id.btnCancelDialogCategory);
+            btnCancelDialog.setOnClickListener(e -> {
+                dialog.dismiss();
 
-    public static ProductAdapter getProductAdapter() {
-        return productAdapter;
-    }
-
-    private void filter(String text) {
-        ArrayList<Product> productList = new ArrayList<>();
-        for (Product product : LoginActivity.getProducts()) {
-            if (product.getTenDoUong().toLowerCase().contains(text.toLowerCase())) {
-                productList.add(product);
-            }
+            });
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), R.string.error_message, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-        productAdapter.filter(productList);
     }
+
 
     private boolean checkRegularExpression(String regex, String str) {
         Pattern pattern = Pattern.compile(regex);
@@ -248,23 +265,6 @@ public class ProductFragment extends Fragment   {
     /*
     If state is true, setup fragment delete state, opposite
      */
-    public static void setDeleteProductState(boolean state) {
-        isDeleteState = state;
-        if (isDeleteState) {
-            selectionList.clear();
-            btnAddProduct.setVisibility(View.INVISIBLE);
-            imDeleteProduct.setVisibility(View.VISIBLE);
-            toolbar.setTitle(R.string.choose_product_title_toolbar);
-        } else {
-            btnAddProduct.setVisibility(View.VISIBLE);
-            imDeleteProduct.setVisibility(View.INVISIBLE);
-            toolbar.setTitle(R.string.title_product);
-        }
-    }
-
-    public static boolean isIsDeleteState() {
-        return isDeleteState;
-    }
 
 //    ============================== DATABASE ==================================
     private void getProductsFromDatabase() {
@@ -305,5 +305,9 @@ public class ProductFragment extends Fragment   {
                 Log.e("error", errorMessage);
             }
         });
+    }
+
+    private void addProductFromDatabase(Category category) {
+        categoryController.addCategory(category);
     }
 }

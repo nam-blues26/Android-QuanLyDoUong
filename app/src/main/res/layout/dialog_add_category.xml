@@ -11,7 +11,7 @@
         android:background="@color/blue_background"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/update_product_title"
+        android:text="@string/add_category_title"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -23,19 +23,19 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tvNameProduct"
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="end"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:text="@string/product_label"
+            android:text="@string/category_name_label"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16dp" />
 
         <EditText
-            android:id="@+id/edNameProduct"
+            android:id="@+id/edAddCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
@@ -46,53 +46,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/tvPriceProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="end"
-            android:paddingTop="10dp"
-            android:paddingRight="8dp"
-            android:text="@string/single_price"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/edPriceProduct"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight=".80"
-                android:gravity="center"
-                android:hint="10000"
-                android:inputType="number"
-                android:paddingRight="4dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".20"
-                android:gravity="center"
-                android:paddingRight="10dp"
-                android:text="@string/price_unit"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -101,20 +54,20 @@
         android:layout_marginBottom="8dp">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnUpdateProduct"
+            android:id="@+id/btnAddNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/border_btn"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:text="@string/name_update_button"
+            android:text="@string/name_add_button"
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/btnCancelDialog"
+            app:layout_constraintRight_toLeftOf="@+id/btnCancelDialogCategory"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCancelDialog"
+            android:id="@+id/btnCancelDialogCategory"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/border_btn_danger"
@@ -122,7 +75,7 @@
             android:paddingRight="40dp"
             android:text="@string/name_cancle_button"
             android:textColor="@color/white"
-            app:layout_constraintLeft_toRightOf="@+id/btnUpdateProduct"
+            app:layout_constraintLeft_toRightOf="@+id/btnAddNewCategory"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

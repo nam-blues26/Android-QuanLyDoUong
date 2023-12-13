@@ -11,12 +11,13 @@
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/BillItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/tvCreateDateInvoiceItem"
+            android:id="@+id/tvCreateDateBill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/invoice_create_date"
@@ -26,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvTotalPriceInvoiceItem"
+            android:id="@+id/tvTotalPriceBill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -48,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNoteInvoiceItem"
+            android:id="@+id/tvNoteBill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -56,7 +57,7 @@
             android:textColor="@color/text_color"
             android:textSize="14sp"
             android:textStyle="italic"
-            app:layout_constraintLeft_toLeftOf="@id/tvCreateDateInvoiceItem"
-            app:layout_constraintTop_toBottomOf="@id/tvCreateDateInvoiceItem" />
+            app:layout_constraintLeft_toLeftOf="@id/tvCreateDateBill"
+            app:layout_constraintTop_toBottomOf="@id/tvCreateDateBill" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

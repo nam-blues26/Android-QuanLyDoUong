@@ -8,33 +8,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.xda.adn.R;
-import edu.xda.adn.model.Invoice;
-import edu.xda.adn.model.InvoiceDetail;
-import edu.xda.adn.model.InvoiceDetailDB;
 import edu.xda.adn.model.Product;
 import edu.xda.adn.model.User;
 
-import edu.xda.adn.service.ApiClient;
-import edu.xda.adn.service.ApiService;
-import edu.xda.adn.view.MyString;
-import edu.xda.adn.viewmodel.InvoiceController;
-import edu.xda.adn.viewmodel.InvoiceDetailController;
-import edu.xda.adn.viewmodel.ProductController;
 import edu.xda.adn.viewmodel.UserController;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,15 +31,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private UserController userController;
     private static RequestQueue requestQueueCallDataWebService;
-    private static ArrayList<Invoice> invoicesFromDatabase;
 
     private static ArrayList<Product> products;
 
-    private static ArrayList<InvoiceDetailDB> invoiceDetailFromDatabase;
-
-    private static ArrayList<Invoice> invoices;
-
-    private static ArrayList<InvoiceDetail> invoiceDetails;
 
     private Button btnSignIn;
     private EditText edUserName, edPassword;
@@ -163,25 +142,4 @@ public class LoginActivity extends AppCompatActivity {
         return requestQueueCallDataWebService;
     }
 
-
-
-    public static ArrayList<Invoice> getInvoicesFromDatabase() {
-        return invoicesFromDatabase;
-    }
-
-    public static ArrayList<InvoiceDetailDB> getInvoiceDetailFromDatabase() {
-        return invoiceDetailFromDatabase;
-    }
-
-    public static ArrayList<Product> getProducts() {
-        return products;
-    }
-
-    public static ArrayList<Invoice> getInvoices() {
-        return invoices;
-    }
-
-    public static ArrayList<InvoiceDetail> getInvoiceDetails() {
-        return invoiceDetails;
-    }
 }

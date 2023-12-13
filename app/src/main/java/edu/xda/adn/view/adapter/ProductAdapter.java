@@ -37,11 +37,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     public ProductAdapter() {
     }
-
-    public interface ProductAdapterListener {
-        void onEditButtonClick(Product product);
-        void onDeleteButtonClick(Product product);
-    }
     public ProductAdapter(Context context,List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -68,7 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Xử lý sự kiện khi nút sửa được nhấn
+                //Xử lý sự kiện khi nút sửa được nhấn
                 Product newProduct = new Product();
                 newProduct.setTenDoUong(holder.edProductName.getText().toString());
                 newProduct.setGia(Integer.parseInt(holder.edProductPrice.getText().toString()));

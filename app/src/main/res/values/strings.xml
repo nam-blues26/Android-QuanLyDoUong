@@ -7,6 +7,7 @@
     <string name="title_home">Trang chủ</string>
     <string name="title_bill">Danh sách hóa đơn</string>
     <string name="title_product">Danh sách sản phẩm</string>
+    <string name="title_staff">Danh sách nhân viên</string>
     <string name="nav_logout">Đăng xuất</string>
     <string name="navigation_drawer_open">Mở thanh điều hướng</string>
     <string name="navigation_drawer_close">Đóng thanh điều hướng</string>
@@ -47,9 +48,21 @@
     <string name="name_login_button">ĐĂNG NHẬP</string>
     <string name="forgot_password">Quên mật khẩu</string>
     <string name="add_product_title">Thêm sản phẩm mới</string>
+    <string name="add_staff_title">Thêm nhân viên mới</string>
+    <string name="add_category_title">Thêm loại đồ uống mới</string>
+    <string name="category_name_label">Tên loại:</string>
+
+
     <string name="product_label">Sản phẩm:</string>
     <string name="single_price">Đơn giá:</string>
     <string name="category_label">Loại:</string>
+
+    <string name="full_name_label">Họ tên:</string>
+    <string name="phone_label">SĐT:</string>
+    <string name="gender_label">Giới tính:</string>
+    <string name="address_label">Địa chỉ:</string>
+    <string name="card_label">CCCD:</string>
+
     <string name="name_add_button">THÊM</string>
     <string name="name_cancle_button">HỦY</string>
     <string name="name_update_button">SỬA</string>
@@ -61,6 +74,9 @@
     <string name="total_invoice">Tổng hóa đơn</string>
     <string name="total_price">Tổng doanh thu</string>
     <string name="nav_title">Quản lý giải khát</string>
+    <string name="nav_staff">Quản lý nhân viên</string>
     <string name="nav_information">Chào admin</string>
     <string name="chart_message">Không có hóa đơn trong khoảng thời gian tìm kiếm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

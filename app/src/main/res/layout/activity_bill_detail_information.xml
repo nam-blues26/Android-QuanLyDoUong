@@ -11,7 +11,7 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/tvProductNameInvoiceDetail"
+        android:id="@+id/tvProductNameBillDetailInformation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="@string/name_product"
@@ -21,39 +21,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvPriceInvoiceDetail"
+        android:id="@+id/tvPriceBillDetailInformation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginRight="55dp"
         android:paddingLeft="2dp"
-        android:layout_marginRight="60dp"
         android:text="@string/price_product"
-        android:gravity="center"
         android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/tvQuantityInvoiceDetail"
+        app:layout_constraintRight_toLeftOf="@+id/tvQuantityBillDetailInformation"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvQuantityInvoiceDetail"
+        android:id="@+id/tvQuantityBillDetailInformation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginRight="32dp"
-        android:gravity="center"
+        android:layout_marginRight="30dp"
         android:text="3"
         android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivCheckDelete"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivCheckDelete"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:adjustViewBounds="true"
-        android:layout_marginRight="-2dp"
-        android:src="@drawable/ic_cancel_48px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

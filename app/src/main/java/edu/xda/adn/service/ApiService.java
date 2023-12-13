@@ -2,8 +2,12 @@ package edu.xda.adn.service;
 
 import java.util.List;
 
+import edu.xda.adn.model.Bill;
+import edu.xda.adn.model.BillDetail;
 import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.Staff;
+import edu.xda.adn.model.Statistical;
 import edu.xda.adn.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,6 +25,9 @@ public interface ApiService {
     Call<List<Product>> getProducts();
     @GET("danh-sach-loai.php")
     Call<List<Category>> getCategories();
+
+    @POST("them-loai.php")
+    Call<Boolean> addCategory(@Body Category category);
     @POST("them-do-uong.php")
     Call<Boolean> addProduct(@Body Product product);
     @DELETE("xoa-do-uong.php/{productId}")
@@ -28,5 +35,25 @@ public interface ApiService {
 
     @POST("sua-do-uong.php/{productId}")
     Call<Boolean> updateProduct(@Path("productId") int productId,@Body Product product);
+
+    @POST("them-nhan-vien.php")
+    Call<Boolean> addProduct(@Body Staff staff);
+    @GET("danh-sach-nhan-vien.php")
+    Call<List<Staff>> getStaffs();
+
+    @DELETE("xoa-nhan-vien.php/{maNV}")
+    Call<Boolean> deleteStaff(@Path("maNV") int maNV);
+
+    @POST("sua-nhan-vien.php/{maNV}")
+    Call<Boolean> updateStaff(@Path("maNV") int maNV,@Body Staff staff);
+
+    @GET("danh-sach-hoa-don.php")
+    Call<List<Bill>> getBills();
+
+    @GET("chi-tiet-hoa-don.php/{maHDB}")
+    Call<List<BillDetail>> getBillDetails(@Path("maHDB") int maHDB);
+
+    @GET("tong-hoa-don.php")
+    Call<Statistical> getStatistical();
 
 }

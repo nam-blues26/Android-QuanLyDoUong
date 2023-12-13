@@ -1,54 +1,43 @@
 package edu.xda.adn.viewmodel;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Map;
 
-import edu.xda.adn.R;
-import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.Staff;
 import edu.xda.adn.service.ApiClient;
-import edu.xda.adn.view.activity.LoginActivity;
-import edu.xda.adn.view.adapter.ProductAdapter;
-import edu.xda.adn.view.fragment.ProductFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductController {
+public class StaffController {
 
-    public interface ProductCallback {
-        void onSuccessList(List<Product> productList);
+    public interface StaffCallback {
+        void onSuccessList(List<Staff> staff);
         void onFailure(String errorMessage);
     }
-    public void getProducts(ProductCallback callback) {
-        Call<List<Product>> call = ApiClient.getInstance().getMyApi().getProducts();
-        call.enqueue(new Callback<List<Product>>() {
+    public void getStaffs(StaffController.StaffCallback callback) {
+        Call<List<Staff>> call = ApiClient.getInstance().getMyApi().getStaffs();
+        call.enqueue(new Callback<List<Staff>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<List<Staff>> call, Response<List<Staff>> response) {
 
-                    List<Product> productList = response.body();
-                    callback.onSuccessList(productList);
+                List<Staff> staffList = response.body();
+                callback.onSuccessList(staffList);
 
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(Call<List<Staff>> call, Throwable t) {
                 callback.onFailure("Có lỗi xảy ra");
                 Log.e("error", t.getMessage());
             }
         });
     }
 
-    public void addProduct(Product product){
-        Call<Boolean> call = ApiClient.getInstance().getMyApi().addProduct(product);
+    public void addStaff(Staff staff){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().addProduct(staff);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -62,8 +51,8 @@ public class ProductController {
         });
     }
 
-    public void updateProduct(int productId, Product product){
-        Call<Boolean> call = ApiClient.getInstance().getMyApi().updateProduct(productId,product);
+    public void updateStaff(int maNV, Staff staff){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().updateStaff(maNV,staff);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -77,8 +66,8 @@ public class ProductController {
         });
     }
 
-    public void deleteProduct(int productId){
-        Call<Boolean> call = ApiClient.getInstance().getMyApi().deleteProduct(productId);
+    public void deleteStaff(int maNV){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().deleteStaff(maNV);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -91,5 +80,4 @@ public class ProductController {
             }
         });
     }
-
 }

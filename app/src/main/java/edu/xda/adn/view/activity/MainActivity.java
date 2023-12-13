@@ -1,15 +1,11 @@
 package edu.xda.adn.view.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,8 +24,8 @@ import edu.xda.adn.R;
 import edu.xda.adn.view.MyAlertDialog;
 import edu.xda.adn.view.MyString;
 import edu.xda.adn.view.fragment.BillFragment;
-import edu.xda.adn.view.fragment.HomeFragment;
 import edu.xda.adn.view.fragment.ProductFragment;
+import edu.xda.adn.view.fragment.StaffFragment;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             replaceFragment(new ProductFragment());
             navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
-            View headerView = navigationView.getHeaderView(0);
-            TextView navUsername = (TextView) headerView.findViewById(R.id.tvHelloUser);
-            navUsername.setText(MyString.HELLO_USER + " " + LoginActivity.USERNAME);
+//            View headerView = navigationView.getHeaderView(0);
+//            TextView navUsername = (TextView) headerView.findViewById(R.id.tvHelloUser);
+//            navUsername.setText(MyString.HELLO_USER + " " + LoginActivity.USERNAME);
         } catch (Exception e) {
             Toast.makeText(this, R.string.error_message, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -104,12 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         try {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                if (!currentFragment.equals(FragmentState.FRAGMENT_HOME)) {
-                    replaceFragment(new HomeFragment());
-                    currentFragment = FragmentState.FRAGMENT_HOME;
-                }
-            } else if (id == R.id.nav_product) {
+            if (id == R.id.nav_product) {
                 if (!currentFragment.equals(FragmentState.FRAGMENT_PRODUCT)) {
                     replaceFragment(new ProductFragment());
                     currentFragment = FragmentState.FRAGMENT_PRODUCT;
@@ -124,10 +115,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }else if (id == R.id.nav_staff) {
+                if (!currentFragment.equals(FragmentState.FRAGMENT_STAFF)) {
+                    replaceFragment(new StaffFragment());
+                    currentFragment = FragmentState.FRAGMENT_STAFF;
+                }
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         } catch (Exception e) {
+            Log.e("Nav-item:", e.getMessage());
             Toast.makeText(this, R.string.error_message, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -142,18 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
             if (currentFragment.equals(FragmentState.FRAGMENT_PRODUCT)) {
-                if (ProductFragment.isIsDeleteState()) {
-                    ProductFragment.setDeleteProductState(false);
-                    ProductFragment.getProductAdapter().notifyDataSetChanged();
-                    return;
-                }
-                replaceFragment(new HomeFragment());
-                currentFragment = FragmentState.FRAGMENT_HOME;
-                navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                replaceFragment(new ProductFragment());
+                currentFragment = FragmentState.FRAGMENT_PRODUCT;
+                navigationView.getMenu().findItem(R.id.nav_product).setChecked(true);
             } else if (currentFragment.equals(FragmentState.FRAGMENT_BILL)) {
-                replaceFragment(new HomeFragment());
-                currentFragment = FragmentState.FRAGMENT_HOME;
-                navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                replaceFragment(new BillFragment());
+                currentFragment = FragmentState.FRAGMENT_BILL;
+                navigationView.getMenu().findItem(R.id.nav_bill).setChecked(true);
+            }else if (currentFragment.equals(FragmentState.FRAGMENT_STAFF)) {
+                replaceFragment(new StaffFragment());
+                currentFragment = FragmentState.FRAGMENT_STAFF;
+                navigationView.getMenu().findItem(R.id.nav_staff).setChecked(true);
             } else if (currentFragment.equals(FragmentState.FRAGMENT_HOME)) {
                 MyAlertDialog.showAlertDialog(
                         this,
@@ -189,11 +185,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
                 if (currentFragment.equals(FragmentState.FRAGMENT_PRODUCT)) {
-                    if (ProductFragment.isIsDeleteState()) {
-                        ProductFragment.setDeleteProductState(false);
-                        ProductFragment.getProductAdapter().notifyDataSetChanged();
-                        return false;
-                    }
+
                 }
                 return true;
             }
@@ -213,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     enum FragmentState {
         FRAGMENT_HOME,
         FRAGMENT_PRODUCT,
-        FRAGMENT_BILL
+        FRAGMENT_BILL,
+        FRAGMENT_STAFF,
     }
 }
