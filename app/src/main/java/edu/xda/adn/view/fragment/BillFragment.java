@@ -52,8 +52,14 @@ public class BillFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
-
+        init(view);
         return view;
+    }
+
+    private void init(View view) {
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.title_bill);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
     }
 
     @Override

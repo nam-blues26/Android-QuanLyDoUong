@@ -43,7 +43,7 @@ public interface MyString {
     String NO_DATA_TEXT = "Không có hóa đơn";
 
     //Sửa đường dẫn api ở đây nhé
-    String LOCALHOST = "http://192.168.1.13/DoUongAPI/";
+    String LOCALHOST = "http://14.225.207.98:8000/";
 //    String LOCALHOST = "http://172.20.10.2/DoUongAPI/";
 
     String URL_DELETE_PRODUCT = LOCALHOST + "/delete_product.php";

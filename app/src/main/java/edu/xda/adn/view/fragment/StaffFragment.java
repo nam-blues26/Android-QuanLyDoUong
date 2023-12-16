@@ -53,7 +53,6 @@ public class StaffFragment extends Fragment {
     private static Toolbar toolbar;
 
 
-
     public StaffFragment() {
         // Required empty public constructor
     }
@@ -138,19 +137,18 @@ public class StaffFragment extends Fragment {
             final RadioButton radio_female = dialog.findViewById(R.id.radio_female);
 
 
-
             Button btnAddNewStaff = dialog.findViewById(R.id.btnAddNewStaff);
             btnAddNewStaff.setOnClickListener(e -> {
                 Staff staff = new Staff();
-                String fullName= edNameStaff.getText().toString();
-                String phone= edPhoneStaff.getText().toString();
-                String address= edAddressStaff.getText().toString();
-                String card= edCardStaff.getText().toString();
+                String fullName = edNameStaff.getText().toString();
+                String phone = edPhoneStaff.getText().toString();
+                String address = edAddressStaff.getText().toString();
+                String card = edCardStaff.getText().toString();
                 Boolean gender;
-                if (radio_male.isChecked()){
-                     gender = true;
-                }else {
-                     gender = false;
+                if (radio_male.isChecked()) {
+                    gender = true;
+                } else {
+                    gender = false;
                 }
                 staff.setHoTen(fullName);
                 staff.setSdt(phone);
@@ -160,13 +158,14 @@ public class StaffFragment extends Fragment {
                 try {
                     addStaffFromDatabase(staff);
                     Toast.makeText(getActivity(), "Thêm nhân viên thành công", Toast.LENGTH_SHORT).show();
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
+                getStaffsFromDatabase();
                 dialog.dismiss();
                 //reload data
-                getStaffsFromDatabase();
+
 
 
             });
@@ -193,7 +192,7 @@ public class StaffFragment extends Fragment {
         staffController.getStaffs(new StaffController.StaffCallback() {
             @Override
             public void onSuccessList(List<Staff> staffList) {
-                staffAdapter = new StaffAdapter(getContext(),staffList);
+                staffAdapter = new StaffAdapter(getContext(), staffList);
                 recyclerView.setAdapter(staffAdapter);
                 recyclerView.setLayoutManager(new GridLayoutManager(staffAdapter.getContext(), 1, GridLayoutManager.VERTICAL, true));
             }
