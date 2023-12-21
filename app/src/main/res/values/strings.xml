@@ -6,6 +6,7 @@
     <string name="nav_report">Report</string>
     <string name="title_home">Trang chủ</string>
     <string name="title_bill">Danh sách hóa đơn</string>
+    <string name="title_category">Danh sách loại đồ uống</string>
     <string name="title_product">Danh sách sản phẩm</string>
     <string name="title_staff">Danh sách nhân viên</string>
     <string name="nav_logout">Đăng xuất</string>
@@ -31,6 +32,7 @@
     <string name="total_price_invoice_detail">Tổng tiền: </string>
     <string name="price_unit">VNĐ</string>
     <string name="input_name_product">Nhập tên sản phẩm</string>
+    <string name="input_name_staff">Nhập tên nhân viên</string>
     <string name="input_username">Nhập tên đăng nhập</string>
     <string name="input_password">**********</string>
     <string name="name_product">Tên sản phẩm</string>
@@ -41,6 +43,8 @@
     <string name="price_product">Giá sản phẩm</string>
     <string name="invoice_create_date">Ngày lập hóa đơn</string>
     <string name="total_price_invocie">Tổng giá</string>
+    <string name="category_id">Id Loại</string>
+    <string name="category_name">Tên Loại</string>
     <string name="note_invoice">Ghi chú</string>
     <string name="login_title">ĐĂNG NHẬP</string>
     <string name="label_username">Tên đăng nhập</string>
@@ -75,6 +79,7 @@
     <string name="total_price">Tổng doanh thu</string>
     <string name="nav_title">Quản lý giải khát</string>
     <string name="nav_staff">Quản lý nhân viên</string>
+    <string name="nav_category">Quản lý loại</string>
     <string name="nav_information">Chào admin</string>
     <string name="chart_message">Không có hóa đơn trong khoảng thời gian tìm kiếm</string>
     <!-- TODO: Remove or change this placeholder text -->

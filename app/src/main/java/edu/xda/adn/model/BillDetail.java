@@ -6,6 +6,7 @@ public class BillDetail {
     private int soLuong;
     private int giaDoUong;
     private String tenDoUong;
+    private String size;
 
     public BillDetail() {
     }
@@ -47,6 +48,14 @@ public class BillDetail {
 
     public void setTenDoUong(String tenDoUong) {
         this.tenDoUong = tenDoUong;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     @Override

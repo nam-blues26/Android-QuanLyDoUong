@@ -125,6 +125,12 @@
                         android:textSize="16dp" />
 
                     <TextView
+                        android:layout_column="2"
+                        android:layout_marginRight="15dp"
+                        android:text="Size"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+                    <TextView
                         android:layout_marginRight="10dp"
                         android:text="@string/quantity"
                         android:textColor="@color/white"

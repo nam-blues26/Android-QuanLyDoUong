@@ -4,9 +4,13 @@ import android.util.Log;
 
 import java.util.List;
 
+import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.SearchRequest;
 import edu.xda.adn.model.Staff;
 import edu.xda.adn.service.ApiClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,6 +23,24 @@ public class StaffController {
     }
     public void getStaffs(StaffController.StaffCallback callback) {
         Call<List<Staff>> call = ApiClient.getInstance().getMyApi().getStaffs();
+        call.enqueue(new Callback<List<Staff>>() {
+            @Override
+            public void onResponse(Call<List<Staff>> call, Response<List<Staff>> response) {
+
+                List<Staff> staffList = response.body();
+                callback.onSuccessList(staffList);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Staff>> call, Throwable t) {
+                callback.onFailure("Có lỗi xảy ra");
+                Log.e("error", t.getMessage());
+            }
+        });
+    }
+    public void searchStaffs(SearchRequest key, StaffController.StaffCallback callback) {
+        Call<List<Staff>> call = ApiClient.getInstance().getMyApi().searchStaff(key);
         call.enqueue(new Callback<List<Staff>>() {
             @Override
             public void onResponse(Call<List<Staff>> call, Response<List<Staff>> response) {

@@ -17,6 +17,11 @@
             android:id="@+id/nav_staff"
             android:icon="@drawable/ic_bill_24"
             android:title="@string/nav_staff" />
+
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/ic_bill_24"
+            android:title="@string/nav_category" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout_24"

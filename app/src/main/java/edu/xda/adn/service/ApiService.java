@@ -6,9 +6,11 @@ import edu.xda.adn.model.Bill;
 import edu.xda.adn.model.BillDetail;
 import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.SearchRequest;
 import edu.xda.adn.model.Staff;
 import edu.xda.adn.model.Statistical;
 import edu.xda.adn.model.User;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -33,8 +35,18 @@ public interface ApiService {
     @DELETE("xoa-do-uong.php/{productId}")
     Call<Boolean> deleteProduct(@Path("productId") int productId);
 
+    @POST("tim-kiem-do-uong.php")
+    Call<List<Product>> searchProduct(@Body SearchRequest key);
+
+    @POST("tim-kiem-nhan-vien.php")
+    Call<List<Staff>> searchStaff(@Body SearchRequest key);
     @POST("sua-do-uong.php/{productId}")
     Call<Boolean> updateProduct(@Path("productId") int productId,@Body Product product);
+    @POST("sua-loai.php/{categoryId}")
+    Call<Boolean> updateCategory(@Path("categoryId") int categoryId,@Body Category category);
+
+    @DELETE("xoa-loai.php/{categoryId}")
+    Call<Boolean> deleteCategory(@Path("categoryId") int categoryId);
 
     @POST("them-nhan-vien.php")
     Call<Boolean> addProduct(@Body Staff staff);

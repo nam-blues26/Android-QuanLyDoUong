@@ -14,10 +14,13 @@ import java.util.Map;
 import edu.xda.adn.R;
 import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.SearchRequest;
 import edu.xda.adn.service.ApiClient;
 import edu.xda.adn.view.activity.LoginActivity;
 import edu.xda.adn.view.adapter.ProductAdapter;
 import edu.xda.adn.view.fragment.ProductFragment;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +46,25 @@ public class ProductController {
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 callback.onFailure("Có lỗi xảy ra");
                 Log.e("error", t.getMessage());
+            }
+        });
+    }
+
+    public void searchProducts(SearchRequest key, ProductCallback callback) {
+        Call<List<Product>> call = ApiClient.getInstance().getMyApi().searchProduct(key);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Log.i("SearchProduct", response.body().toString());
+                List<Product> productList = response.body();
+                callback.onSuccessList(productList);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                callback.onFailure("Có lỗi xảy ra");
+                Log.e("errorSearchProduct", t.getMessage());
             }
         });
     }

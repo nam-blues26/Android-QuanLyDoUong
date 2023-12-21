@@ -49,5 +49,35 @@ public class CategoryController {
             }
         });
     }
+
+    public void updateCategory(int categoryId, Category category){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().updateCategory(categoryId,category);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("error", t.getMessage());
+            }
+        });
+    }
+
+    public void deleteCategory(int categoryId){
+        Call<Boolean> call = ApiClient.getInstance().getMyApi().deleteCategory(categoryId);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("error", t.getMessage());
+            }
+        });
+    }
 }
 

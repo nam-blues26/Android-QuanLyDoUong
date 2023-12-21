@@ -34,10 +34,6 @@ import edu.xda.adn.viewmodel.BillController;
 
 public class BillFragment extends Fragment {
 
-    private EditText edSearchInvoice;
-
-    private FloatingActionButton btnAddInvoice;
-
     private RecyclerView recyclerView;
     private BillController billController = new BillController();
 

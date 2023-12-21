@@ -24,6 +24,7 @@ import edu.xda.adn.R;
 import edu.xda.adn.view.MyAlertDialog;
 import edu.xda.adn.view.MyString;
 import edu.xda.adn.view.fragment.BillFragment;
+import edu.xda.adn.view.fragment.CategoryFragment;
 import edu.xda.adn.view.fragment.ProductFragment;
 import edu.xda.adn.view.fragment.StaffFragment;
 
@@ -120,6 +121,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     replaceFragment(new StaffFragment());
                     currentFragment = FragmentState.FRAGMENT_STAFF;
                 }
+            }else if (id == R.id.nav_category) {
+                if (!currentFragment.equals(FragmentState.FRAGMENT_CATEGORY)) {
+                    replaceFragment(new CategoryFragment());
+                    currentFragment = FragmentState.FRAGMENT_CATEGORY;
+                }
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -150,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new StaffFragment());
                 currentFragment = FragmentState.FRAGMENT_STAFF;
                 navigationView.getMenu().findItem(R.id.nav_staff).setChecked(true);
+            }else if (currentFragment.equals(FragmentState.FRAGMENT_CATEGORY)) {
+                replaceFragment(new CategoryFragment());
+                currentFragment = FragmentState.FRAGMENT_CATEGORY;
+                navigationView.getMenu().findItem(R.id.nav_category).setChecked(true);
             } else if (currentFragment.equals(FragmentState.FRAGMENT_HOME)) {
                 MyAlertDialog.showAlertDialog(
                         this,
@@ -207,5 +217,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FRAGMENT_PRODUCT,
         FRAGMENT_BILL,
         FRAGMENT_STAFF,
+        FRAGMENT_CATEGORY
     }
 }

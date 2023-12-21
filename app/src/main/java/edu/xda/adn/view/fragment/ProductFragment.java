@@ -1,10 +1,7 @@
 package edu.xda.adn.view.fragment;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,38 +19,29 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.xda.adn.R;
 import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
-import edu.xda.adn.service.ApiClient;
-import edu.xda.adn.view.MyAlertDialog;
+import edu.xda.adn.model.SearchRequest;
 import edu.xda.adn.view.MyString;
-import edu.xda.adn.view.activity.LoginActivity;
-import edu.xda.adn.view.activity.MainActivity;
-import edu.xda.adn.view.adapter.CategoryAdapter;
+import edu.xda.adn.view.adapter.CategoryProductAdapter;
 import edu.xda.adn.view.adapter.ProductAdapter;
 import edu.xda.adn.viewmodel.CategoryController;
 import edu.xda.adn.viewmodel.ProductController;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProductFragment extends Fragment   {
 
     private EditText edSearchProduct;
+    private ImageView ivsearchProduct;
 
     private ProductController productController = new ProductController();
     private CategoryController categoryController = new CategoryController();
@@ -70,10 +57,8 @@ public class ProductFragment extends Fragment   {
     private static Toolbar toolbar;
 
 
-    private static ImageView imAddCategory;
-
     private Spinner spinnerCategory;
-    private CategoryAdapter categoryAdapter;
+    private CategoryProductAdapter categoryAdapter;
 
     @Nullable
     @Override
@@ -90,7 +75,7 @@ public class ProductFragment extends Fragment   {
     }
 
     private void init(View view) {
-        imAddCategory = view.findViewById(R.id.imAddCategory);
+        ivsearchProduct=view.findViewById(R.id.ivsearchProduct);
         edSearchProduct = view.findViewById(R.id.edSearchProduct);
         btnAddProduct = view.findViewById(R.id.btnAddProduct);
         toolbar = getActivity().findViewById(R.id.toolbar);
@@ -101,25 +86,27 @@ public class ProductFragment extends Fragment   {
 
     private void createEvent() {
 
-        edSearchProduct.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        edSearchProduct.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
 
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+        ivsearchProduct.setOnClickListener(e->{
+            SearchRequest searchRequest = new SearchRequest(edSearchProduct.getText().toString());
+            getProductsSearchFromDatabase(searchRequest);
         });
 
-        imAddCategory.setOnClickListener(e->{
-            openDialogAddCategory();
-        });
 
         btnAddProduct.setOnClickListener(e -> {
             openDialogAddProduct();
@@ -223,35 +210,6 @@ public class ProductFragment extends Fragment   {
         }
     }
 
-    private void openDialogAddCategory() {
-        try {
-            final Dialog dialog = new Dialog(getContext());
-            dialog.setContentView(R.layout.dialog_add_category);
-            final EditText edCategory = dialog.findViewById(R.id.edAddCategory);
-
-            Button btnAddNewProduct = dialog.findViewById(R.id.btnAddNewCategory);
-            btnAddNewProduct.setOnClickListener(e -> {
-                Category category = new Category();
-                category.setTenLoai(edCategory.getText().toString());
-                addProductFromDatabase(category);
-                dialog.dismiss();
-            });
-            Button btnCancelDialog = dialog.findViewById(R.id.btnCancelDialogCategory);
-            btnCancelDialog.setOnClickListener(e -> {
-                dialog.dismiss();
-
-            });
-            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-            lp.copyFrom(dialog.getWindow().getAttributes());
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            dialog.show();
-            dialog.getWindow().setAttributes(lp);
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), R.string.error_message, Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
 
     private boolean checkRegularExpression(String regex, String str) {
@@ -284,6 +242,23 @@ public class ProductFragment extends Fragment   {
         });
     }
 
+    private void getProductsSearchFromDatabase(SearchRequest key) {
+        productController.searchProducts(key,new ProductController.ProductCallback() {
+            @Override
+            public void onSuccessList(List<Product> productList) {
+                productAdapter = new ProductAdapter(getContext(),productList);
+                recyclerView.setAdapter(productAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(productAdapter.getContext(), 1, GridLayoutManager.VERTICAL, true));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                Log.e("error", errorMessage);
+            }
+        });
+    }
+
     private void addProductFromDatabase(Product product) {
         productController.addProduct(product);
     }
@@ -294,7 +269,7 @@ public class ProductFragment extends Fragment   {
             @Override
             public void onSuccess(List<Category> categoryList) {
                 Log.e("categoryList", categoryList.toString());
-                categoryAdapter = new CategoryAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryList);
+                categoryAdapter = new CategoryProductAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryList);
                 categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                 spinnerCategory.setAdapter(categoryAdapter);
@@ -307,7 +282,4 @@ public class ProductFragment extends Fragment   {
         });
     }
 
-    private void addProductFromDatabase(Category category) {
-        categoryController.addCategory(category);
-    }
 }

@@ -32,6 +32,7 @@ import java.util.List;
 import edu.xda.adn.R;
 import edu.xda.adn.model.Category;
 import edu.xda.adn.model.Product;
+import edu.xda.adn.model.SearchRequest;
 import edu.xda.adn.model.Staff;
 import edu.xda.adn.view.MyString;
 import edu.xda.adn.view.adapter.ProductAdapter;
@@ -45,6 +46,7 @@ public class StaffFragment extends Fragment {
 
 
     private EditText edSearchStaff;
+    private ImageView ivsearchStaff;
     private static FloatingActionButton btnAddStaff;
 
     private StaffController staffController = new StaffController();
@@ -80,6 +82,8 @@ public class StaffFragment extends Fragment {
 
     private void init(View view) {
 //        edSearchStaff = view.findViewById(R.id.edSearchStaff);
+        ivsearchStaff=view.findViewById(R.id.ivsearchStaff);
+        edSearchStaff = view.findViewById(R.id.edSearchStaff);
         btnAddStaff = view.findViewById(R.id.btnAddStaff);
         toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.title_staff);
@@ -104,6 +108,11 @@ public class StaffFragment extends Fragment {
 //                filter(editable.toString());
 //            }
 //        });
+
+        ivsearchStaff.setOnClickListener(e->{
+            SearchRequest searchRequest = new SearchRequest(edSearchStaff.getText().toString());
+            getStaffsSearchFromDatabase(searchRequest);
+        });
 
         btnAddStaff.setOnClickListener(e -> {
             openDialogAddStaff();
@@ -190,6 +199,23 @@ public class StaffFragment extends Fragment {
     //===================================DATABASE==================
     private void getStaffsFromDatabase() {
         staffController.getStaffs(new StaffController.StaffCallback() {
+            @Override
+            public void onSuccessList(List<Staff> staffList) {
+                staffAdapter = new StaffAdapter(getContext(), staffList);
+                recyclerView.setAdapter(staffAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(staffAdapter.getContext(), 1, GridLayoutManager.VERTICAL, true));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                Log.e("error", errorMessage);
+            }
+        });
+    }
+
+    private void getStaffsSearchFromDatabase(SearchRequest key) {
+        staffController.searchStaffs(key,new StaffController.StaffCallback() {
             @Override
             public void onSuccessList(List<Staff> staffList) {
                 staffAdapter = new StaffAdapter(getContext(), staffList);

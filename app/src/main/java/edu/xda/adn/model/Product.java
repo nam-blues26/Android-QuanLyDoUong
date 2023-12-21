@@ -3,6 +3,8 @@ package edu.xda.adn.model;
 public class Product {
     private int maDoUong;
     private String tenDoUong;
+
+    private String tenLoai;
     private int gia;
     private boolean trangThai;
     private int maLoai;
@@ -10,11 +12,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(int maDoUong, String tenDoUong, int gia, int maLoai) {
+    public Product(int maDoUong, String tenDoUong, int gia, int maLoai,String tenLoai) {
         this.maDoUong = maDoUong;
         this.tenDoUong = tenDoUong;
         this.gia = gia;
         this.maLoai = maLoai;
+        this.tenLoai = tenLoai;
     }
 
     public int getMaDoUong() {
@@ -55,6 +58,14 @@ public class Product {
 
     public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public String getTenLoai() {
+        return tenLoai;
+    }
+
+    public void setTenLoai(String tenLoai) {
+        this.tenLoai = tenLoai;
     }
 
     @Override

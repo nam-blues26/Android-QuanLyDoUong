@@ -60,6 +60,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.MyViewHolder> 
 
         holder.billItem.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 openDialogAddStaff(bill);
             }

@@ -58,7 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 //        holder.imageViewProduct.setImageURI(product.getImage());
         holder.edProductName.setText(product.getTenDoUong());
         holder.edProductPrice.setText("" + product.getGia());
-
+        holder.tvProductCategory.setText(product.getTenLoai());
         // Xử lý sự kiện nút sửa và xóa ở đây (có thể sử dụng Interface để giao tiếp với Activity hoặc Fragment)
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,12 +116,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
         EditText edProductName;
         EditText edProductPrice;
+
+        TextView tvProductCategory;
         Button buttonEdit;
         Button buttonDelete;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             edProductName = itemView.findViewById(R.id.edProductName);
             edProductPrice = itemView.findViewById(R.id.edProductPrice);
+            tvProductCategory = itemView.findViewById(R.id.tvProductCategory);
             buttonEdit = itemView.findViewById(R.id.buttonEdit);
             buttonDelete = itemView.findViewById(R.id.buttonDelete);
         }

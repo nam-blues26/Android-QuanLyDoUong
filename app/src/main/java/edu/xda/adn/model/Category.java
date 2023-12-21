@@ -4,6 +4,8 @@ public class Category {
     private int maLoai;
     private String tenLoai;
 
+    private  int soLuong;
+
     public Category() {
     }
 
@@ -26,6 +28,14 @@ public class Category {
 
     public void setTenLoai(String tenLoai) {
         this.tenLoai = tenLoai;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     @Override

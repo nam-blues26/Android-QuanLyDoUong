@@ -43,6 +43,7 @@ public class BillDetailAdapter extends RecyclerView.Adapter<BillDetailAdapter.My
         holder.tvProductNameBillDetailInformation.setText(billDetail.getTenDoUong());
         holder.tvPriceBillDetailInformation.setText(""+billDetail.getGiaDoUong());
         holder.tvQuantityBillDetailInformation.setText(""+billDetail.getSoLuong());
+        holder.tvSizeBillDetailInformation.setText(billDetail.getSize());
     }
 
     @Override
@@ -61,11 +62,13 @@ public class BillDetailAdapter extends RecyclerView.Adapter<BillDetailAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvProductNameBillDetailInformation;
         TextView tvPriceBillDetailInformation;
+        TextView tvSizeBillDetailInformation;
         TextView tvQuantityBillDetailInformation;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProductNameBillDetailInformation = itemView.findViewById(R.id.tvProductNameBillDetailInformation);
             tvPriceBillDetailInformation = itemView.findViewById(R.id.tvPriceBillDetailInformation);
+            tvSizeBillDetailInformation = itemView.findViewById(R.id.tvSizeBillDetailInformation);
             tvQuantityBillDetailInformation = itemView.findViewById(R.id.tvQuantityBillDetailInformation);
         }
 
