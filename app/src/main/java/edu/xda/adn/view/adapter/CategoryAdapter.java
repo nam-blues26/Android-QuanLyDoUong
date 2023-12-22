@@ -63,7 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         Category category = categoryList.get(position);
 
         holder.edCategoryName.setText(category.getTenLoai().toString());
-
+        holder.edCategorySoLuong.setText(""+category.getSoLuong());
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,11 +126,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         EditText edCategoryName;
+        EditText edCategorySoLuong;
         Button buttonEdit;
         Button buttonDelete;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             edCategoryName = itemView.findViewById(R.id.edCategoryName);
+            edCategorySoLuong = itemView.findViewById(R.id.edCategorySoLuong);
             buttonEdit = itemView.findViewById(R.id.buttonEditCategory);
             buttonDelete = itemView.findViewById(R.id.buttonDeleteCategory);
         }

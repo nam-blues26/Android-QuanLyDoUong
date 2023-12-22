@@ -20,13 +20,27 @@
 
             <EditText
                 android:id="@+id/edCategoryName"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Category Name"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/edCategorySoLuong"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="So luong"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:enabled="false"/>
+        </LinearLayout>
 
 
         <LinearLayout
